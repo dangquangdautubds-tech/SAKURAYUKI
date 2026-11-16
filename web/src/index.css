@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Token theo DESIGN.md — HSL để dùng được với opacity của Tailwind */
+@layer base {
+  :root {
+    --background: 0 0% 100%;       /* #FFFFFF */
+    --foreground: 0 0% 20%;        /* #333333 */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+    --primary: 0 30% 46%;          /* #994F4F nút & liên kết (chữ trắng đạt 5:1) */
+    --primary-foreground: 0 0% 100%;
+    --rose: 0 34% 57%;             /* #B76E6E tiêu đề lớn, viền */
+    --secondary: 33 31% 94%;       /* #F5F1EC nền be */
+    --secondary-foreground: 0 0% 20%;
+    --muted: 33 31% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 34% 95%;           /* #F7EEEE */
+    --accent-foreground: 0 30% 40%;
+    --destructive: 4 76% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 145 45% 34%;
+    --warning: 36 81% 36%;
+    --gold: 36 45% 55%;            /* #C29A59 đường kẻ, sao */
+    --border: 30 20% 88%;
+    --input: 30 20% 85%;
+    --ring: 0 30% 46%;
+    --radius: 0.75rem;
+    --ink: 15 11% 15%;             /* #2A2422 */
+    --paper: 0 0% 100%;
+  }
+  .dark {
+    --background: 15 9% 10%;
+    --foreground: 30 20% 92%;
+    --card: 15 9% 13%;
+    --card-foreground: 30 20% 92%;
+    --popover: 15 9% 13%;
+    --popover-foreground: 30 20% 92%;
+    --primary: 0 40% 68%;
+    --primary-foreground: 15 9% 10%;
+    --rose: 0 42% 72%;
+    --secondary: 15 9% 16%;
+    --secondary-foreground: 30 20% 92%;
+    --muted: 15 9% 16%;
+    --muted-foreground: 25 8% 65%;
+    --accent: 0 20% 20%;
+    --accent-foreground: 0 45% 85%;
+    --destructive: 4 82% 67%;
+    --destructive-foreground: 15 9% 10%;
+    --success: 144 43% 56%;
+    --warning: 36 71% 58%;
+    --gold: 37 46% 61%;
+    --border: 15 8% 22%;
+    --input: 15 8% 24%;
+    --ring: 0 40% 68%;
+    --ink: 15 11% 8%;
+    --paper: 30 20% 92%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+  h1, h2, h3 { @apply font-serif font-normal; }
+  /* Khách đã bật "giảm hiệu ứng" trong hệ thống: dừng mọi animation và cuộn mượt */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .kicker { @apply text-xs uppercase tracking-[0.28em] text-primary; }
+  .h-rose { @apply text-rose; }
+  .card-img { @apply relative block overflow-hidden rounded-2xl bg-ink text-left text-white; }
+  .card-img::after { content: ''; @apply pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent; }
+  .card-img > .cap { @apply absolute inset-x-0 bottom-0 z-10 p-5; }
+  .container-x { @apply mx-auto w-full max-w-6xl px-4 md:px-6; }
+  .section { @apply py-16 md:py-24; }
+  .vertical-jp { writing-mode: vertical-rl; letter-spacing: .4em; }
+  .rule { @apply h-px w-16 bg-gold; }
+  .seigaiha {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24'%3E%3Cg fill='none' stroke='%23B76E6E' stroke-opacity='.10'%3E%3Cg%3E%3Ccircle cx='24' cy='24' r='22'/%3E%3Ccircle cx='24' cy='24' r='16'/%3E%3Ccircle cx='24' cy='24' r='10'/%3E%3C/g%3E%3Cg transform='translate(-24 -12)'%3E%3Ccircle cx='24' cy='24' r='22'/%3E%3Ccircle cx='24' cy='24' r='16'/%3E%3Ccircle cx='24' cy='24' r='10'/%3E%3C/g%3E%3Cg transform='translate(24 -12)'%3E%3Ccircle cx='24' cy='24' r='22'/%3E%3Ccircle cx='24' cy='24' r='16'/%3E%3Ccircle cx='24' cy='24' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .prose-sy h2 { @apply mt-10 mb-3 text-2xl; }
+  .prose-sy h3 { @apply mt-8 mb-2 text-xl; }
+  .prose-sy p { @apply my-4 leading-[1.75]; }
+  .prose-sy a { @apply text-primary underline underline-offset-2; }
+  .prose-sy ul { @apply my-4 list-disc pl-6 space-y-1; }
+  .prose-sy ol { @apply my-4 list-decimal pl-6 space-y-1; }
+  .prose-sy blockquote { @apply my-6 border-l-2 border-primary pl-4 italic text-muted-foreground; }
+  .prose-sy img { @apply my-6 w-full rounded-lg; }
+  .prose-sy hr { @apply my-8 border-border; }
+}
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
