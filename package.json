@@ -1,0 +1,19 @@
+{
+  "name": "sakura-yuki-kimono",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website đặt lịch thuê kimono Sakura Yuki — React + Cloudflare Worker + Google Apps Script",
+  "scripts": {
+    "postinstall": "cd web && npm install",
+    "dev": "cd web && npm run dev",
+    "build": "node scripts/build-demo-backend.mjs && cd web && npm run build",
+    "preview:demo": "cd web && npm run build:demo",
+    "deploy": "npm run build && wrangler deploy",
+    "test": "node scripts/build-demo-backend.mjs && node tests/backend.test.mjs && node tests/worker.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "engines": { "node": ">=20" }
+}

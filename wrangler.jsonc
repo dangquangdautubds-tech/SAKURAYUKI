@@ -1,0 +1,21 @@
+{
+  // Cloudflare Worker phục vụ website + API. Deploy: npm run deploy (hoặc kết nối GitHub trong Cloudflare → Workers Builds)
+  "name": "sakura-yuki",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./web/dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "observability": { "enabled": true },
+  "vars": {
+    // Dán URL Web App của Google Apps Script vào đây (hoặc đặt trong Cloudflare dashboard)
+    "APPS_SCRIPT_URL": "",
+    "STRIPE_PAYPAY": "false"
+  }
+  // Bí mật đặt bằng lệnh (không ghi vào file):
+  //   npx wrangler secret put WORKER_SECRET
+  //   npx wrangler secret put STRIPE_SECRET_KEY
+  //   npx wrangler secret put STRIPE_WEBHOOK_SECRET
+}
